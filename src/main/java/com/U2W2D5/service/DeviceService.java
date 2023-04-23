@@ -36,9 +36,10 @@ public class DeviceService {
 		return devRepo.save(d);
 	}
 	
-	public void deleteDevice(Long id) {
+	public String deleteDevice(Long id) {
 		Device d = findById(id);
 		devRepo.delete(d);
+		return "Device successfully deleted!";
 	}
 	
 	public Device updateDevice(Device d) {

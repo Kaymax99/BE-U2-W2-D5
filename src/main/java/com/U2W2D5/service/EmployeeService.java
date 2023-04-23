@@ -24,13 +24,13 @@ public class EmployeeService {
 	 
 	 @Autowired @Qualifier("FakeUser") private ObjectProvider<Employee> fakeProvider;
 	 
-	 public void saveFakeEmployee() {
+	public void saveFakeEmployee() {
 		 Employee u = fakeProvider.getObject();
 		 saveEmployee(u);
 		 log.info("Fake user succesfully created!");
 	 }
 
-	private Employee saveEmployee(Employee u) {
+	public Employee saveEmployee(Employee u) {
 		if (empRepo.existsByEmail(u.getEmail())) {
 			throw new EntityExistsException("Email already registered!");
 		}
@@ -39,9 +39,10 @@ public class EmployeeService {
 		return u;
 	}
 	
-	private void deleteEmployee(Long id) {
+	public String deleteEmployee(Long id) {
 		Employee e = findById(id);
 		empRepo.delete(e);
+		return "Employee successfully deleted!";
 	}
 	
 	public Employee updateEmployee(Employee e) {
